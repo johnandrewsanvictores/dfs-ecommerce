@@ -83,6 +83,7 @@ body {
     border-radius: 8px;
     background: var(--input-bg-color);
     transition: all 0.3s ease;
+    box-sizing: border-box;
 }
 
 .password-input {
@@ -139,6 +140,11 @@ body {
 }
 
 @media (max-width: 768px) {
+    .login-page {
+        padding: 1rem;
+        padding-top: calc(70px + 1em);
+    }
+
     .login-container {
         flex-direction: column;
         width: 100%;
@@ -160,11 +166,6 @@ body {
     .login-image img {
         width: 60%;
         max-width: 300px;
-    }
-
-    .form-group input {
-        width: 100%;
-        box-sizing: border-box;
     }
 }
 

@@ -41,10 +41,28 @@
                 </form>
             </div>
             <div class="login-image">
-                <img src="../assets/images/shopping.svg" alt="E-commerce Image">
+                <img src="../assets/images/main/shopping.svg" alt="Login Illustration">
             </div>
         </div>
     </div>
+
+    <script>
+        // Add password toggle functionality
+        document.querySelectorAll('.toggle-password').forEach(icon => {
+            icon.addEventListener('click', function() {
+                const input = this.previousElementSibling;
+                if (input.type === 'password') {
+                    input.type = 'text';
+                    this.classList.remove('fa-eye-slash');
+                    this.classList.add('fa-eye');
+                } else {
+                    input.type = 'password';
+                    this.classList.remove('fa-eye');
+                    this.classList.add('fa-eye-slash');
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>
