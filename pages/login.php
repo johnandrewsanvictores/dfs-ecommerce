@@ -17,18 +17,32 @@
     <?php require("../includes/navbar.php") ?>
 
     <div class="login-page">
-        <div class="login-image">
-            <img src="../assets/images/shopping.svg" alt="E-commerce Image">
-        </div>
-        <div class="login-form">
-            <h2>Login</h2>
-            <form action="login_process.php" method="post">
-                <input type="text" name="username" placeholder="Username" required>
-                <input type="password" name="password" placeholder="Password" required>
-                <button type="submit">Login</button>
-                <a href="forgot_password.php" class="forgot-password">Forgot Password?</a>
-                <p class="register-link">Don't have an account? <a href="register.php">Register here</a></p>
-            </form>
+        <div class="login-container">
+            <div class="login-form">
+                <h2>Welcome Back!</h2>
+                <p class="subtitle">Sign in to continue your fashion journey</p>
+                <form action="login_process.php" method="post">
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <input type="text" id="username" name="username" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <div class="password-input">
+                            <input type="password" id="password" name="password" required>
+                            <i class="fas fa-eye-slash toggle-password"></i>
+                        </div>
+                    </div>
+                    <button type="submit" class="login-btn">Login</button>
+                    <div class="form-footer">
+                        <a href="forgot_password.php" class="forgot-password">Forgot Password?</a>
+                        <p class="register-link">Don't have an account? <a href="register.php">Register here</a></p>
+                    </div>
+                </form>
+            </div>
+            <div class="login-image">
+                <img src="../assets/images/shopping.svg" alt="E-commerce Image">
+            </div>
         </div>
     </div>
 </body>
