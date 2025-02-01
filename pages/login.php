@@ -24,12 +24,12 @@
                 <form action="login_process.php" method="post">
                     <div class="form-group">
                         <label for="username">Username</label>
-                        <input type="text" id="username" name="username" required>
+                        <input type="text" id="username" name="username">
                     </div>
                     <div class="form-group">
                         <label for="password">Password</label>
                         <div class="password-input">
-                            <input type="password" id="password" name="password" required>
+                            <input type="password" id="password" name="password">
                             <i class="fas fa-eye-slash toggle-password"></i>
                         </div>
                     </div>
@@ -46,23 +46,9 @@
         </div>
     </div>
 
-    <script>
-        // Add password toggle functionality
-        document.querySelectorAll('.toggle-password').forEach(icon => {
-            icon.addEventListener('click', function() {
-                const input = this.previousElementSibling;
-                if (input.type === 'password') {
-                    input.type = 'text';
-                    this.classList.remove('fa-eye-slash');
-                    this.classList.add('fa-eye');
-                } else {
-                    input.type = 'password';
-                    this.classList.remove('fa-eye');
-                    this.classList.add('fa-eye-slash');
-                }
-            });
-        });
-    </script>
+    <script src="../js/login.js"></script>
+
+    <?php require("../includes/footer.php") ?>
 </body>
 
 </html>
