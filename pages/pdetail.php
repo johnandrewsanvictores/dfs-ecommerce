@@ -23,8 +23,7 @@
 <section id="product-detail">
     <?php
     $productId = $_GET['id'];
-    // Fetch product details from the database using $productId
-    // For demonstration, using static data
+
     $product = [
         'title' => 'Product ' . $productId,
         'image' => 'path/to/image' . $productId . '.jpg',
