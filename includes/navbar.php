@@ -17,14 +17,14 @@
 
                 </div>
                 <ul class=" nav-links">
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">About</a></li>
-                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="../pages/home.php" class="active">Home</a></li>
+                    <li><a href="../pages/about.php">About</a></li>
+                    <li><a href="../pages/contact.php">Contact Us</a></li>
                     <div id="btns-unauthenticated">
-                        <a href="#">Login</a>
-                        <a href="#" id="register-btn">Register</a>
+                        <a href="../pages/login.php">Login</a>
+                        <a href="../pages/register.php" id="register-btn">Register</a>
                     </div>
-                    <li style="display:none"><a href="#">My Account</a></li>
+                    <li style="display:none"><a href="../pages/account.php">My Account</a></li>
                 </ul>
             </div>
             <div class="nav-icons-container">
@@ -47,30 +47,7 @@
 </nav>
 
 
-<script>
-    const body = document.querySelector("body"),
-        nav = document.querySelector("nav"),
-        searchToggle = document.querySelector(".searchToggle"),
-        sidebarOpen = document.querySelector(".sidebarOpen"),
-        siderbarClose = document.querySelector(".siderbarClose");
-
-
-    // js code to toggle search box
-    searchToggle.addEventListener("click", () => {
-        searchToggle.classList.toggle("active");
-    });
-
-
-    //   js code to toggle sidebar
-    sidebarOpen.addEventListener("click", () => {
-        nav.classList.add("active");
-    });
-    body.addEventListener("click", e => {
-        let clickedElm = e.target;
-        if (!clickedElm.classList.contains("sidebarOpen") && !clickedElm.classList.contains("menu")) {
-            nav.classList.remove("active");
-        }
-    });
+<script src="../js/navbar.js"></script>
 </script>
 
 <style>
@@ -409,5 +386,23 @@
             display: none;
         }
 
+    }
+
+    .nav-links li a.active {
+        color: var(--secondary);
+    }
+
+    .nav-links li a.active::before {
+        opacity: 1;
+        background-color: var(--secondary);
+    }
+
+    .nav-links li a:hover {
+        color: var(--secondary);
+    }
+
+    .nav-links li a:hover::before {
+        opacity: 1;
+        background-color: var(--secondary);
     }
 </style>

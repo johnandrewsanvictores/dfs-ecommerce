@@ -1,91 +1,5 @@
-header {
-    background: #f8f8f8;
-    padding: 10px;
-    text-align: center;
-}
-
-.navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #f8f8f8;
-    padding: 10px 20px;
-}
-
-.navbar .logo {
-    display: flex;
-    align-items: center;
-}
-
-.navbar .logo img {
-    width: 50px;
-    height: auto;
-    margin-right: 10px;
-}
-
-.navbar .logo span {
-    font-size: 1.2rem;
-    font-weight: bold;
-    color: #333;
-}
-
-.navbar .nav-links {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-}
-
-.navbar .nav-links a {
-    text-decoration: none;
-    color: #333;
-    font-size: 1rem;
-}
-
-.navbar .nav-links a:hover {
-    color: var(--primary);
-}
-
-.navbar .icons {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-}
-
-.navbar .icons i {
-    font-size: 1.5rem;
-    color: #333;
-    cursor: pointer;
-}
-
-.navbar .icons img {
-    width: 30px;
-    height: auto;
-}
-
-.navbar .search-bar {
-    display: none;
-    flex-direction: column;
-    position: absolute;
-    top: 60px;
-    right: 20px;
-    background: #fff;
-    padding: 10px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    z-index: 1000;
-}
-
-.navbar .search-bar input[type="text"] {
-    width: 200px;
-    padding: 8px;
-    margin-bottom: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
-
-.navbar .search-bar select {
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+body {
+    padding-top: 70px; 
 }
 
 .hero {
@@ -191,22 +105,31 @@ header {
 #banner {
     margin: 30px 0;
     text-align: center;
+    position: relative;
+}
+
+.banner-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
 }
 
 .slider-wrappers {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    position: relative;
 }
 
 .slider-containers {
-    width: 70%; 
+    width: 70%; /* Reverted to original width */
     height: auto; 
     margin: auto;
     overflow: hidden;
     position: relative;
     border: none;
     border-radius: 8px;
+    padding: 0; /* Removed padding */
 }
 
 .sliders {
@@ -215,27 +138,92 @@ header {
 }
 
 .slides {
-    min-width: 100%;
+    min-width: 100%; /* Reverted to original width */
     overflow: hidden;
     position: relative;
 }
 
 .slides img {
     width: 100%;
-    height: auto; /* Maintain aspect ratio */
+    height: auto; 
+    border-radius: 8px;
 }
 
-#prevBtns,
-#nextBtns {
-    font-size: var(--h1);
+.slide-caption {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    background: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-align: left;
+}
+
+.slide-caption h3 {
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+.slide-caption p {
+    margin: 5px 0 0;
+    font-size: 1rem;
+}
+
+.banner-btn {
+    font-size: var(--h2);
     color: var(--primary);
-    background-color: white;
     border: none;
-    border-radius: 10%;
+    border-radius: 50%;
     cursor: pointer;
     width: 50px;
-    margin: auto;
-    transition: background-color 0.3s ease;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    z-index: 10;
+    background-color: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    line-height: 0; /* Ensure the arrow is centered */
+}
+
+.banner-btn:hover {
+    background-color: rgba(255, 255, 255, 1);
+    transform: translateY(-50%) scale(1.1);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+}
+
+#prevBtns {
+    left: 10px;
+}
+
+#nextBtns {
+    right: 10px;
+}
+
+
+.dots-container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.dot {
+    height: 15px;
+    width: 15px;
+    margin: 0 5px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    transition: background-color 0.6s ease;
+    cursor: pointer;
+}
+
+.dot.active {
+    background-color: var(--primary);
 }
 
 #brands, #products, #categories {
@@ -290,6 +278,21 @@ header {
     color: #333;
 }
 
+.card-price{
+    color: var(--primary);
+}
+
+.card a {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
+.card a:hover {
+    text-decoration: none;
+    color: inherit;
+}
+
 .section-title {
     text-align: left;
     margin-left: 20px;
@@ -305,33 +308,6 @@ header {
     padding: 0 20px;
 }
 
-footer {
-    background-color: var(--primary);
-    color: var(--font-white);
-    padding: 20px 10px;
-    text-align: center;
-}
-
-footer p {
-    margin: 0;
-    font-size: 14px;
-}
-
-footer .links {
-    margin-top: 10px;
-}
-
-footer .links a {
-    color: #fff;
-    text-decoration: none;
-    margin: 0 10px;
-    font-size: 14px;
-}
-
-footer .links a:hover {
-    text-decoration: underline;
-    color: #ff99cc;
-}
 
 @media (max-width: 1200px) {
     .hero {
@@ -366,20 +342,6 @@ footer .links a:hover {
 }
 
 @media (max-width: 768px) {
-    .navbar {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    .navbar .nav-links {
-        flex-direction: column;
-        gap: 10px;
-    }
-
-    .navbar .icons {
-        margin-top: 10px;
-    }
-
     .hero {
         padding: 50px 20px;
     }
@@ -393,6 +355,12 @@ footer .links a:hover {
         width: 100%;
     }
 
+    .banner-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 1.5rem;
+    }
+
     .card {
         width: 100%;
     }
@@ -402,27 +370,7 @@ footer .links a:hover {
     }
 }
 
-@media (max-width: 480px) {
-    .navbar .logo img {
-        width: 40px;
-    }
-
-    .navbar .logo span {
-        font-size: 1rem;
-    }
-
-    .navbar .nav-links a {
-        font-size: 0.9rem;
-    }
-
-    .navbar .icons i {
-        font-size: 1.2rem;
-    }
-
-    .navbar .icons img {
-        width: 25px;
-    }
-
+@media (max-width: 480px) { 
     .hero {
         padding: 30px 10px;
     }
@@ -448,15 +396,25 @@ footer .links a:hover {
         font-size: 1rem;
     }
 
-    footer p, footer .links a {
-        font-size: 12px;
-    }
-
     .img-container {
         max-width: 200px;
     }
 
     .img-overlay {
         font-size: 0.8rem;
+    }
+
+    .banner-btn {
+        width: 30px;
+        height: 30px;
+        font-size: 1.2rem;
+    }
+
+    .slide-caption h3 {
+        font-size: 1.2rem;
+    }
+
+    .slide-caption p {
+        font-size: 0.9rem;
     }
 }

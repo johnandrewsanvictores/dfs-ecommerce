@@ -1,6 +1,7 @@
 $(document).ready(function() {
     let slideIndex = 0;
     const slides = $('.sliders .slides');
+    const dots = $('.dot');
     let slideTimeout;
 
     function showSlides() {
@@ -8,12 +9,18 @@ $(document).ready(function() {
         if (slideIndex >= slides.length) {
             slideIndex = 0;
         }
-        const slideWidth = slides.eq(0).width();
+        updateSlides();
+        clearTimeout(slideTimeout);
+        slideTimeout = setTimeout(showSlides, 6000);
+    }
+
+    function updateSlides() {
+        const slideWidth = slides.eq(0).width(); // Reverted to original width calculation
         $('.sliders').css({
             'transform': `translateX(-${slideIndex * slideWidth}px)`
         });
-        clearTimeout(slideTimeout);
-        slideTimeout = setTimeout(showSlides, 6000); 
+        dots.removeClass('active');
+        dots.eq(slideIndex).addClass('active');
     }
 
     $('#prevBtns').click(function() {
@@ -21,12 +28,9 @@ $(document).ready(function() {
         if (slideIndex < 0) {
             slideIndex = slides.length - 1;
         }
-        const slideWidth = slides.eq(0).width();
-        $('.sliders').css({
-            'transform': `translateX(-${slideIndex * slideWidth}px)`
-        });
+        updateSlides();
         clearTimeout(slideTimeout);
-        slideTimeout = setTimeout(showSlides, 5000); 
+        slideTimeout = setTimeout(showSlides, 5000);
     });
 
     $('#nextBtns').click(function() {
@@ -34,13 +38,17 @@ $(document).ready(function() {
         if (slideIndex >= slides.length) {
             slideIndex = 0;
         }
-        const slideWidth = slides.eq(0).width();
-        $('.sliders').css({
-            'transform': `translateX(-${slideIndex * slideWidth}px)`
-        });
+        updateSlides();
         clearTimeout(slideTimeout);
-        slideTimeout = setTimeout(showSlides, 5000); 
+        slideTimeout = setTimeout(showSlides, 5000);
     });
 
-    showSlides(); 
+    dots.click(function() {
+        slideIndex = $(this).data('slide');
+        updateSlides();
+        clearTimeout(slideTimeout);
+        slideTimeout = setTimeout(showSlides, 5000);
+    });
+
+    showSlides();
 });
