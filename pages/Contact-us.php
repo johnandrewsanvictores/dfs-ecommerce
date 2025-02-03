@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact Us</title>
-    <link rel="stylesheet" href="../assets/css/Contact-us.css">
+    <link rel="stylesheet" href="../styles/global.css">
+    <link rel="stylesheet" href="../styles/Contact-us.css">
 </head>
 
 <body>
@@ -31,7 +32,7 @@
 
         <div class="contact-form">
             <h2>Contact Us</h2>
-            <p>If you have any questions or need assistance, we're here to help!</p>
+            <p>If you have any questions or need assistance, we're here to help! Whether it's about product details, shipping, returns, or any other inquiries, our customer support team is ready to assist you. Simply reach out to us, and we'll do our best to respond promptly and provide the support you need. Your satisfaction is our priority!</p>
             <form>
                 <input type="text" name="name" placeholder="Name *" required>
                 <input type="tel" name="phone" placeholder="Phone Number *" required>
