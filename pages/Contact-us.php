@@ -14,6 +14,7 @@
 </head>
 
 <body>
+    <?php require("../includes/navbar.php") ?>
     <div class="contact-container">
         <h1>GET IN TOUCH</h1>
         <div class="contact-info">
@@ -66,6 +67,8 @@
         </div>
         
     </div> 
+
+    <?php require("../includes/footer.php") ?>
 </body>
 
 </html>
