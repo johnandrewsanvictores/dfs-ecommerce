@@ -1,20 +1,11 @@
-/* General Styling */
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-  background-color: var(--white-bg);
-}
-
 .contact-container {
-  width: 80%;
-  margin: 0 auto;
-  padding: 20px;
-  background-color: var(--primary);
+  width: 100%;
+  margin: auto;
+  padding: 5em;
+  background-color: #4B032F;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Contact Header */
 .contact-header {
   background-color: var(--dark-bg);
   color: var(--primary);
@@ -30,13 +21,13 @@ body {
 
 .contact-container h1 {
   text-align: center;
-  color: #333;
+  color: var(--primary);
 }
 
 .contact-info {
   display: flex;
   justify-content: center;
-  gap: 50px;
+  gap: 10em;
   margin-top: 20px;
 }
 
@@ -66,12 +57,30 @@ body {
 
 /* Contact Form Section */
 .contact-form {
-  background-color: var(--white-bg);
   text-align: left;
   padding: 40px 20px;
-  width: 50%;
+  width:100%;
+  max-width: 90em;
   margin: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 2em;
 }
+
+.contact-form-info {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  width: 100%;
+  max-width: 43em;
+}
+
+.contact-form-info form div label span {
+
+  color: red;
+}
+
 
 .contact-form h3 {
   color: var(--primary);
@@ -80,13 +89,16 @@ body {
 }
 
 .contact-form p {
-  font-size: var(--small);
   color: var(--font-dark);
+  width: 100%;
+  max-width: 56ch;
 }
 
 form {
   display: flex;
   flex-direction: column;
+  width: 100%;
+  gap: 1em;
 }
 
 form input,
@@ -117,12 +129,34 @@ button:hover {
 }
 
 /* Responsive Design */
-@media (max-width: 768px) {
+/*@media (max-width: 768px) {
   .contact-info {
     flex-direction: column;
     gap: 20px;
   }
+  
+  
+}
+*/
+
+@media (max-width: 810px) {
   .contact-form {
-    width: 80%;
+    flex-direction: column;
+    gap: 20px;
+    
+    
+  }
+  
+  .contact-form-text {
+    text-align: center;
+  }
+  .contact-info{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2em;
+  }
+  .contact-info div:nth-child(3)
+  {
+    grid-column: 1/3;
   }
 }
