@@ -29,16 +29,6 @@
                 <div class="register-form-container">
                     <h2>Create Account</h2>
                     <form action="register_process.php" method="post">
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="firstname">First Name</label>
-                                <input type="text" id="firstname" name="firstname">
-                            </div>
-                            <div class="form-group">
-                                <label for="lastname">Last Name</label>
-                                <input type="text" id="lastname" name="lastname">
-                            </div>
-                        </div>
                         <div class="form-group">
                             <label for="email">Email Address</label>
                             <input type="email" id="email" name="email">

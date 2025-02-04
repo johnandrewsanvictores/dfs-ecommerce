@@ -63,32 +63,6 @@ const Form_Validation = (function() {
         // Clear previous errors
         document.querySelectorAll('.error-message').forEach(error => error.remove());
 
-        // First Name validation
-        const firstname = document.querySelector('#firstname');
-        if (!firstname.value.trim()) {
-            show_error(firstname, 'First name is required');
-            is_valid = false;
-        } else if (firstname.value.length < 2) {
-            show_error(firstname, 'First name must be at least 2 characters');
-            is_valid = false;
-        } else if (!/^[a-zA-Z\s]*$/.test(firstname.value)) {
-            show_error(firstname, 'First name can only contain letters');
-            is_valid = false;
-        }
-
-        // Last Name validation
-        const lastname = document.querySelector('#lastname');
-        if (!lastname.value.trim()) {
-            show_error(lastname, 'Last name is required');
-            is_valid = false;
-        } else if (lastname.value.length < 2) {
-            show_error(lastname, 'Last name must be at least 2 characters');
-            is_valid = false;
-        } else if (!/^[a-zA-Z\s]*$/.test(lastname.value)) {
-            show_error(lastname, 'Last name can only contain letters');
-            is_valid = false;
-        }
-
         // Email validation
         const email = document.querySelector('#email');
         const email_regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
