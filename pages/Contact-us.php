@@ -7,7 +7,7 @@
     <title>Contact Us</title>
     <link rel="stylesheet" href="../styles/global.css">
     <link rel="stylesheet" href="../styles/Contact-us.css">
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../assets/fontawesome/css/all.min.css">
 </head>
 
 <body>
@@ -17,17 +17,17 @@
         <div class="contact-info">
 
             <div class="info-box">
-                <i class="fa-solid fa-phone"></i>
+                <i class="fas fa-phone"></i>
                 <h3>Phone</h3>
                 <p>0906 403 0712</p>
             </div>
             <div class="info-box">
-                <i class="fa-regular fa-envelope"></i>
+                <i class="far fa-envelope"></i>
                 <h3>Email</h3>
                 <p>dreamshop052523@gmail.com</p>
             </div>
             <div class="info-box">
-                <i class="fa-solid fa-location-dot"></i>
+                <i class="fas fa-location-dot"></i>
                 <h3>Address</h3>
                 <p>Dinglasan Bldg, Quezon Avenue St.,<br> Lucena, Philippines</p>
             </div>
