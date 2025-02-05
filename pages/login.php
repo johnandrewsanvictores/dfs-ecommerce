@@ -47,7 +47,6 @@
     </div>
 
     <script>
-        // Add password toggle functionality
         document.querySelectorAll('.toggle-password').forEach(icon => {
             icon.addEventListener('click', function() {
                 const input = this.previousElementSibling;

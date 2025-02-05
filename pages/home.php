@@ -10,9 +10,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="../styles/home.css">
     <link rel="stylesheet" href="../global.css">
+    <link rel="stylesheet" href="../styles/filter.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="../js/search.js"></script>
     <script src="../js/banner.js"></script>
+    <script src="../js/filter.js"></script>
     <title>Dreams Shop Bags - Home</title>
 </head>
 
@@ -102,35 +103,30 @@
 <section id="brands">
     <h2 class="section-title">Brands</h2>
     <div class="brand-list">
-        <!-- Brand Card 1 -->
         <div class="card">
             <img src="path/to/brand1.jpg" alt="Brand 1" class="card-img-top">
             <div class="card-body">
                 <h5 class="card-title">Brand 1</h5>
             </div>
         </div>
-        <!-- Brand Card 2 -->
         <div class="card">
             <img src="path/to/brand2.jpg" alt="Brand 2" class="card-img-top">
             <div class="card-body">
                 <h5 class="card-title">Brand 2</h5>
             </div>
         </div>
-        <!-- Brand Card 3 -->
         <div class="card">
             <img src="path/to/brand3.jpg" alt="Brand 3" class="card-img-top">
             <div class="card-body">
                 <h5 class="card-title">Brand 3</h5>
             </div>
         </div>
-        <!-- Brand Card 4 -->
         <div class="card">
             <img src="path/to/brand4.jpg" alt="Brand 4" class="card-img-top">
             <div class="card-body">
                 <h5 class="card-title">Brand 4</h5>
             </div>
         </div>
-        <!-- Brand Card 5 -->
         <div class="card">
             <img src="path/to/brand5.jpg" alt="Brand 5" class="card-img-top">
             <div class="card-body">
@@ -143,31 +139,26 @@
 <section id="categories">
     <h2 class="section-title">Categories</h2>
     <div class="category-list" style="display: flex; flex-wrap: wrap;">
-        <!-- Category Card 1 -->
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">Category 1</h5>
             </div>
         </div>
-        <!-- Category Card 2 -->
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">Category 2</h5>
             </div>
         </div>
-        <!-- Category Card 3 -->
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">Category 3</h5>
             </div>
         </div>
-        <!-- Category Card 4 -->
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">Category 4</h5>
             </div>
         </div>
-        <!-- Category Card 5 -->
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">Category 5</h5>
@@ -176,59 +167,71 @@
     </div>
 </section>
 
+<section id="filter">
+    <h2 class="section-title">Filter Products</h2>
+    <form id="filter-form">
+        <label for="sort-by">Sort by:</label>
+        <select id="sort-by" name="sort-by">
+            <option value="default">Default</option>
+            <option value="discounted">Discounted</option>
+            <option value="new-arrival">New Arrival</option>
+            <option value="popular">Popular</option>
+        </select>
+        <label for="price-min">Price range:</label>
+        <input type="number" id="price-min" name="price-min" placeholder="Min" min="0">
+        <input type="number" id="price-max" name="price-max" placeholder="Max" min="0">
+        <button type="button" id="apply-filters">Apply</button>
+    </form>
+</section>
+
 <section id="products">
     <h2 class="section-title">Products</h2>
-    <div class="product-list">
-        <!-- Product Card 1 -->
-        <div class="card">
+    <div class="product-list" style="display: flex; flex-wrap: wrap; gap: 20px;">
+        <div class="card" data-category="discounted" data-price="10" style="flex: 1 1 calc(20% - 20px); box-sizing: border-box;">
             <a href="pdetail.php?id=1">
                 <div class="card-body">
                     <h5 class="card-title">Product 1</h5>
-                    <img src="path/to/image1.jpg" alt="Product 1" class="card-img-top">
+                    <img src="../assets/images/products/product1.jpg" alt="Product 1" class="card-img-top">
                     <p class="card-text">Description of Product 1</p>
                     <p class="card-price">$10.00</p>
                 </div>
             </a>
         </div>
-        <!-- Product Card 2 -->
-        <div class="card">
+        <div class="card" data-category="new-arrival" data-price="20" style="flex: 1 1 calc(20% - 20px); box-sizing: border-box;">
             <a href="pdetail.php?id=2">
                 <div class="card-body">
                     <h5 class="card-title">Product 2</h5>
-                    <img src="path/to/image2.jpg" alt="Product 2" class="card-img-top">
+                    <img src="../assets/images/products/product2.jpg" alt="Product 2" class="card-img-top">
                     <p class="card-text">Description of Product 2</p>
                     <p class="card-price">$20.00</p>
                 </div>
             </a>
         </div>
-        <!-- Product Card 3 -->
-        <div class="card">
+        <div class="card" data-category="popular" data-price="30" style="flex: 1 1 calc(20% - 20px); box-sizing: border-box;">
             <a href="pdetail.php?id=3">
                 <div class="card-body">
                     <h5 class="card-title">Product 3</h5>
-                    <img src="path/to/image3.jpg" alt="Product 3" class="card-img-top">
+                    <img src="../assets/images/products/product3.jpg" alt="Product 3" class="card-img-top">
                     <p class="card-text">Description of Product 3</p>
                     <p class="card-price">$30.00</p>
                 </div>
             </a>
         </div>
-        <!-- Product Card 4 -->
-        <div class="card">
+        <div class="card" data-category="discounted" data-price="40" style="flex: 1 1 calc(20% - 20px); box-sizing: border-box;">
             <a href="pdetail.php?id=4">
                 <div class="card-body">
                     <h5 class="card-title">Product 4</h5>
-                    <img src="path/to/image4.jpg" alt="Product 4" class="card-img-top">
+                    <img src="../assets/images/products/product4.jpg" alt="Product 4" class="card-img-top">
                     <p class="card-text">Description of Product 4</p>
                     <p class="card-price">$40.00</p>
                 </div>
             </a>
         </div>
-        <!-- Product Card 5 -->
-        <div class="card">
+        <div class="card" data-category="new-arrival" data-price="50" style="flex: 1 1 calc(20% - 20px); box-sizing: border-box;">
             <a href="pdetail.php?id=5">
                 <div class="card-body">
                     <h5 class="card-title">Product 5</h5>
-                    <img src="path/to/image5.jpg" alt="Product 5" class="card-img-top">
+                    <img src="../assets/images/products/product5.jpg" alt="Product 5" class="card-img-top">
                     <p class="card-text">Description of Product 5</p>
                     <p class="card-price">$50.00</p>
                 </div>
@@ -241,7 +244,6 @@
 <?php require("../includes/footer.php") ?>
 </footer>
 </body>
-
 </html>
 
 

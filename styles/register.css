@@ -175,7 +175,7 @@
     box-shadow: 0 1px 4px rgba(236, 0, 140, 0.2);
 }
 
-/* Optional: Add disabled state */
+
 .otp-btn:disabled {
     background: var(--stroke-grey);
     border-color: var(--stroke-grey);
@@ -279,7 +279,7 @@
     text-decoration: none;
 }
 
-/* Responsive breakpoints */
+
 @media (max-width: 1200px) {
     .register-container {
         width: 95%;
@@ -416,7 +416,6 @@
     }
 }
 
-/* Handle very small screens */
 @media (max-width: 360px) {
     .register-left {
         padding: 1rem 0.75rem;

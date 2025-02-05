@@ -1,0 +1,61 @@
+#filter {
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    margin: 15px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%; 
+}
+
+#filter-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+#filter-form label {
+    font-size: 0.9rem;
+    color: #333;
+    margin-right: 8px;
+    font-weight: bold;
+}
+
+#filter-form select,
+#filter-form input {
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    width: 130px;
+    transition: border-color 0.3s ease;
+}
+
+#filter-form select:focus,
+#filter-form input:focus {
+    border-color: var(--primary);
+    outline: none;
+}
+
+#filter-form button {
+    padding: 8px 15px;
+    background-color: var(--primary);
+    color: var(--font-white);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+
+#filter-form button:hover {
+    background-color: var(--tertiary);
+    color: var(--font-dark);
+    transform: scale(1.05);
+}

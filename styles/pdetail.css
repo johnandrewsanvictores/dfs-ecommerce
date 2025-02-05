@@ -68,6 +68,192 @@ body {
     color: var(--font-dark);
 }
 
+.ratings {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.ratings i {
+    color: var(--primary);
+    margin-right: 5px;
+}
+
+.reviews {
+    font-size: 1rem;
+    color: var(--font-dark);
+    margin-bottom: 20px;
+}
+
+.related-products {
+    margin-top: 50px;
+}
+
+.related-products .product-list {
+    display: flex;
+    justify-content: center; 
+    flex-wrap: nowrap;
+    overflow-x: auto;
+}
+
+.related-products .card {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    width: 200px;
+    flex: 0 0 auto;
+    margin-right: 20px;
+    margin-bottom: 20px;
+}
+
+.related-products .card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.related-products .card img {
+    width: 100%;
+    height: auto;
+}
+
+.related-products .card-body {
+    padding: 10px;
+    text-align: center;
+}
+
+.related-products .card-title {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.related-products .card-price {
+    color: var(--primary);
+}
+
+.related-products .card a {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
+.related-products .card a:hover {
+    text-decoration: none;
+    color: inherit;
+}
+
+.back-button {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    background-color: var(--secondary);
+    color: var(--font-white);
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.back-button:hover {
+    background-color: var(--tertiary);
+    color: var(--font-dark);
+}
+
+.back-arrow {
+    position: absolute;
+    top: 90px; 
+    left: 40px;
+    font-size: 1.5rem;
+    color: var(--primary);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.back-arrow:hover {
+    color: var(--tertiary);
+}
+
+.comments {
+    margin-top: 50px;
+    padding: 20px;
+    background: #f9f9f9;
+    border-radius: 8px;
+}
+
+.comments h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+.comment-list {
+    margin-bottom: 20px;
+}
+
+.comment {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.comment p {
+    margin: 0;
+    font-size: 1rem;
+}
+
+.comment-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.comment-form textarea {
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    resize: vertical;
+}
+
+.comment-form button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    background-color: var(--primary);
+    color: var(--font-white);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.comment-form button:hover {
+    background-color: var(--tertiary);
+    color: var(--font-dark);
+}
+
+.comment-card {
+    background: #fff;
+    border-radius: 5px; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin-bottom: 20px;
+    width: 80%; 
+    margin: 0 auto 20px auto; 
+}
+
+.comment-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.comment-card .card-body {
+    padding: 10px;
+    text-align: left;
+}
+
 @media (max-width: 768px) {
     .product-container {
         flex-direction: column;

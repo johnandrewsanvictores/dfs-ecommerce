@@ -15,7 +15,7 @@ $(document).ready(function() {
     }
 
     function updateSlides() {
-        const slideWidth = slides.eq(0).width(); // Reverted to original width calculation
+        const slideWidth = slides.eq(0).width(); 
         $('.sliders').css({
             'transform': `translateX(-${slideIndex * slideWidth}px)`
         });

@@ -21,6 +21,7 @@
 </header>
 
 <section id="product-detail">
+    <a href="javascript:history.back()" class="back-arrow"><i class="fa fa-arrow-left"></i></a>
     <?php
     $productId = $_GET['id'];
 
@@ -37,9 +38,73 @@
         </div>
         <div class="product-details">
             <h1><?php echo $product['title']; ?></h1>
+            <div class="ratings">
+                <?php for ($i = 0; $i < 5; $i++): ?>
+                    <i class="fa fa-star"></i>
+                <?php endfor; ?>
+            </div>
+            <div class="reviews">
+                <p>4.5 out of 5 stars (20 reviews)</p>
+            </div>
             <p><?php echo $product['description']; ?></p>
             <p class="product-price"><?php echo $product['price']; ?></p>
             <button class="add-to-cart">Add to Cart</button>
+        </div>
+    </div>
+</section>
+
+<section class="comments">
+    <h2>Comments</h2>
+    <div class="comment-list">
+        <div class="card comment-card">
+            <div class="card-body">
+                <p><strong>User 1:</strong> Great product!</p>
+            </div>
+        </div>
+        <div class="card comment-card">
+            <div class="card-body">
+                <p><strong>User 2:</strong> I love it!</p>
+            </div>
+        </div>
+    </div>
+    <form class="comment-form">
+        <textarea placeholder="Add a comment..." required></textarea>
+        <button type="submit">Submit</button>
+    </form>
+</section>
+
+<section class="related-products">
+    <h2>Related Products</h2>
+    <div class="product-list">
+        <div class="card">
+            <a href="pdetail.php?id=1">
+                <div class="card-body">
+                    <h5 class="card-title">Related Product 1</h5>
+                    <img src="path/to/related1.jpg" alt="Related Product 1" class="card-img-top">
+                    <p class="card-text">Short description of related product 1.</p>
+                    <p class="card-price">$20.00</p>
+                </div>
+            </a>
+        </div>
+        <div class="card">
+            <a href="pdetail.php?id=2">
+                <div class="card-body">
+                    <h5 class="card-title">Related Product 2</h5>
+                    <img src="path/to/related2.jpg" alt="Related Product 2" class="card-img-top">
+                    <p class="card-text">Short description of related product 2.</p>
+                    <p class="card-price">$25.00</p>
+                </div>
+            </a>
+        </div>
+        <div class="card">
+            <a href="pdetail.php?id=3">
+                <div class="card-body">
+                    <h5 class="card-title">Related Product 3</h5>
+                    <img src="path/to/related3.jpg" alt="Related Product 3" class="card-img-top">
+                    <p class="card-text">Short description of related product 3.</p>
+                    <p class="card-price">$30.00</p>
+                </div>
+            </a>
         </div>
     </div>
 </section>
