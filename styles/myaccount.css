@@ -1,0 +1,62 @@
+header {
+    padding-bottom: 10px;
+}
+
+body {
+    padding-top: 70px;
+}
+
+/*
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    gap: 15px;
+    padding: 100px;
+}
+In case balikan ko
+*/
+
+.flex-container {
+    display: flex;
+    flex: 1;
+    gap: 15px;
+    padding: 20px;
+}
+
+.side-nav {
+    background-color: #fafafa;
+    padding: 30px;
+    border: 0px solid #ddd;
+    text-align: left;
+    width: 15%;
+}
+
+.side-nav ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.side-nav ul li {
+    margin-bottom: 10px;
+}
+
+.side-nav ul li a {
+    text-decoration: none;
+    color: #333;
+}
+
+.main-content {
+    background-color: #fff;
+    padding: 50px;
+    border: 0px solid #ddd;
+    flex: 1;
+}
+
+.side-nav ul li.active a {
+    color: #B87333;
+}
+
+a:link, a:active {
+    color: #B87333;
+    text-decoration: none;
+}
