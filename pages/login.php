@@ -17,37 +17,55 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // Check if username is email or username
             $field = filter_var($username, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
 
-            // Prepare SQL statement
-            $sql = "SELECT * FROM staff_acc WHERE $field = :username AND status = 'active'";
+            // First check staff_acc table
+            $sql = "SELECT *, 'staff' as user_type FROM staff_acc WHERE $field = :username AND status = 'active'";
             $stmt = $connection->prepare($sql);
             $stmt->execute(['username' => $username]);
             $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            // If not found in staff_acc, check customer table
+            if (!$user) {
+                $sql = "SELECT *, 'customer' as user_type FROM customer WHERE $field = :username";
+                $stmt = $connection->prepare($sql);
+                $stmt->execute(['username' => $username]);
+                $user = $stmt->fetch(PDO::FETCH_ASSOC);
+            }
 
             if ($user) {
                 // Verify password
                 if (password_verify($password, $user['password'])) {
                     // Set session variables
-                    $_SESSION['staff_id'] = $user['staff_id'];
-                    $_SESSION['username'] = $user['username'];
-                    $_SESSION['role'] = $user['role'];
+                    if ($user['user_type'] === 'staff') {
+                        $_SESSION['staff_id'] = $user['staff_id'];
+                        $_SESSION['username'] = $user['username'];
+                        $_SESSION['role'] = $user['role'];
 
-                    // Update last login
-                    $update_sql = "UPDATE staff_acc SET last_login = CURRENT_TIMESTAMP WHERE staff_id = :staff_id";
-                    $update_stmt = $connection->prepare($update_sql);
-                    $update_stmt->execute(['staff_id' => $user['staff_id']]);
+                        // Update last login for staff
+                        $update_sql = "UPDATE staff_acc SET last_login = CURRENT_TIMESTAMP WHERE staff_id = :staff_id";
+                        $update_stmt = $connection->prepare($update_sql);
+                        $update_stmt->execute(['staff_id' => $user['staff_id']]);
 
-                    // Redirect based on environment
-                    if (strpos($_SERVER['HTTP_HOST'], 'localhost') !== false) {
-                        header('Location: ../../dfs-store-ms/');
+                        // Redirect staff based on environment
+                        if (strpos($_SERVER['HTTP_HOST'], 'localhost') !== false) {
+                            header('Location: ../../dfs-store-ms/');
+                        } else {
+                            header('Location: https://www.yourdomain.com/');
+                        }
                     } else {
-                        header('Location: https://www.yourdomain.com/');
+                        // Set customer session variables
+                        $_SESSION['customer_id'] = $user['id'];
+                        $_SESSION['username'] = $user['username'];
+                        $_SESSION['user_type'] = 'customer';
+
+                        // Redirect customer to home page
+                        header('Location: ./home.php');
                     }
                     exit();
                 } else {
                     $error_message = "Invalid password. Please try again.";
                 }
             } else {
-                $error_message = "Account not found or inactive.";
+                $error_message = "Account not found.";
             }
         } catch (PDOException $e) {
             $error_message = "An error occurred. Please try again later.";

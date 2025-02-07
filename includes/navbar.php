@@ -1,3 +1,16 @@
+<?php
+// Start session if not already started
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+// Check if user is logged in as customer
+$isCustomerLoggedIn = isset($_SESSION['customer_id']) && isset($_SESSION['user_type']) && $_SESSION['user_type'] === 'customer';
+
+// Get current page name
+$current_page = basename($_SERVER['PHP_SELF'], '.php');
+?>
+
 <nav>
     <div class="nav-bar">
         <div class="left-nav">
@@ -9,22 +22,24 @@
         </div>
 
         <div class="right-nav">
-
             <div class="menu">
                 <div class="logo-toggle">
                     <span class="logo"><a href="#">Dream Shop Bags</a></span>
                     <i class="fa-solid fa-xmark siderbarClose"></i>
-
                 </div>
-                <ul class=" nav-links">
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">About</a></li>
-                    <li><a href="#">Contact Us</a></li>
-                    <div id="btns-unauthenticated">
-                        <a href="#">Login</a>
-                        <a href="#" id="register-btn">Register</a>
-                    </div>
-                    <li style="display:none"><a href="#">My Account</a></li>
+                <ul class="nav-links">
+                    <li><a href="home.php" class="<?php echo $current_page === 'home' ? 'active' : ''; ?>">Home</a></li>
+                    <li><a href="about.php" class="<?php echo $current_page === 'about' ? 'active' : ''; ?>">About</a></li>
+                    <li><a href="contact.php" class="<?php echo $current_page === 'contact' ? 'active' : ''; ?>">Contact Us</a></li>
+
+                    <?php if ($isCustomerLoggedIn): ?>
+                        <li><a href="account.php" class="<?php echo $current_page === 'account' ? 'active' : ''; ?>">My Account</a></li>
+                    <?php else: ?>
+                        <div id="btns-unauthenticated">
+                            <a href="#">Login</a>
+                            <a href="#" id="register-btn">Register</a>
+                        </div>
+                    <?php endif; ?>
                 </ul>
             </div>
             <div class="nav-icons-container">
@@ -46,7 +61,6 @@
     </div>
 </nav>
 
-
 <script>
     const body = document.querySelector("body"),
         nav = document.querySelector("nav"),
@@ -54,17 +68,16 @@
         sidebarOpen = document.querySelector(".sidebarOpen"),
         siderbarClose = document.querySelector(".siderbarClose");
 
-
     // js code to toggle search box
     searchToggle.addEventListener("click", () => {
         searchToggle.classList.toggle("active");
     });
 
-
     //   js code to toggle sidebar
     sidebarOpen.addEventListener("click", () => {
         nav.classList.add("active");
     });
+
     body.addEventListener("click", e => {
         let clickedElm = e.target;
         if (!clickedElm.classList.contains("sidebarOpen") && !clickedElm.classList.contains("menu")) {
@@ -409,5 +422,36 @@
             display: none;
         }
 
+    }
+
+    /* Add or update these styles for active state */
+    .nav-links li a.active {
+        color: var(--primary);
+        position: relative;
+    }
+
+    .nav-links li a.active::before {
+        content: '';
+        position: absolute;
+        left: 50%;
+        bottom: -4px;
+        transform: translateX(-50%);
+        width: 30px;
+        height: 2px;
+        background: linear-gradient(to right, var(--primary), var(--secondary));
+        border-radius: 4px;
+        opacity: 1;
+    }
+
+    @media (max-width: 790px) {
+        .nav-links li a.active {
+            color: var(--font-white);
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+        }
+
+        .nav-links li a.active::before {
+            display: none;
+        }
     }
 </style>
