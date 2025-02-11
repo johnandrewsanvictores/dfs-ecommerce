@@ -6,39 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Forgot Password</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-</head>
-
-<body>
-    <div class="forgot-password-page">
-        <div class="forgot-password-container">
-            <div class="forgot-password-form">
-                <h2>Reset Your Password</h2>
-                <p class="subtitle">Enter your email address below and we'll send you a link to reset your password.</p>
-                <div id="error-message" class="error-message" style="display: none;">
-                    <i class="fas fa-exclamation-circle"></i>
-                    <span id="error-text"></span>
-                </div>
-                <form id="forgotPasswordForm" action="javascript:void(0);" method="post">
-                    <div class="form-group">
-                        <label for="email">Email Address</label>
-                        <input type="email" id="email" name="email" required placeholder="Enter your email">
-                    </div>
-                    <button type="submit" class="reset-btn">Send Reset Link</button>
-                    <div id="loading-message" class="loading-message" style="display: none;">
-                        <i class="fas fa-spinner fa-spin"></i> Sending email...
-                    </div>
-                </form>
-                <div id="success-dialog" class="success-dialog" style="display: none;">
-                    <i class="fas fa-check-circle"></i>
-                    <p>Password reset link sent successfully! Please check your email.</p>
-                </div>
-                <div class="back-to-login">
-                    <p>Remembered your password? <a href="login.php">Back to Login</a></p>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <style>
         .forgot-password-page {
             display: flex;
@@ -210,7 +177,47 @@
                 opacity: 1;
             }
         }
+
+        .countdown {
+            margin-top: 1rem;
+            color: #E91E63;
+            font-size: 0.9rem;
+            display: none;
+        }
     </style>
+</head>
+
+<body>
+    <div class="forgot-password-page">
+        <div class="forgot-password-container">
+            <div class="forgot-password-form">
+                <h2>Reset Your Password</h2>
+                <p class="subtitle">Enter your email address below and we'll send you a link to reset your password.</p>
+                <div id="error-message" class="error-message" style="display: none;">
+                    <i class="fas fa-exclamation-circle"></i>
+                    <span id="error-text"></span>
+                </div>
+                <form id="forgotPasswordForm" action="javascript:void(0);" method="post">
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" required placeholder="Enter your email">
+                    </div>
+                    <button type="submit" class="reset-btn" id="sendButton">Send Reset Link</button>
+                    <div id="loading-message" class="loading-message" style="display: none;">
+                        <i class="fas fa-spinner fa-spin"></i> Sending email...
+                    </div>
+                    <div id="countdown" class="countdown"></div>
+                </form>
+                <div id="success-dialog" class="success-dialog" style="display: none;">
+                    <i class="fas fa-check-circle"></i>
+                    <p>Password reset link sent successfully! Please check your email.</p>
+                </div>
+                <div class="back-to-login">
+                    <p>Remembered your password? <a href="login.php">Back to Login</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script>
         document.getElementById('forgotPasswordForm').addEventListener('submit', function() {
@@ -218,11 +225,15 @@
             const errorMessage = document.getElementById('error-message');
             const successDialog = document.getElementById('success-dialog');
             const loadingMessage = document.getElementById('loading-message');
+            const countdownDisplay = document.getElementById('countdown');
+            const sendButton = document.getElementById('sendButton');
             const errorText = document.getElementById('error-text');
 
             errorMessage.style.display = 'none';
             successDialog.style.display = 'none';
             loadingMessage.style.display = 'flex';
+            sendButton.disabled = true;
+            let countdown = 30;
 
             fetch('../api/send_password_reset.php', {
                     method: 'POST',
@@ -236,16 +247,42 @@
                     loadingMessage.style.display = 'none';
                     if (data.includes('Message sent')) {
                         successDialog.style.display = 'block';
+                        startCountdown();
+                        autoHide(successDialog);
                     } else {
                         errorText.textContent = data;
                         errorMessage.style.display = 'block';
+                        sendButton.disabled = false;
+                        autoHide(errorMessage);
                     }
                 })
                 .catch(error => {
                     loadingMessage.style.display = 'none';
                     errorText.textContent = 'An error occurred. Please try again later.';
                     errorMessage.style.display = 'block';
+                    sendButton.disabled = false;
+                    autoHide(errorMessage);
                 });
+
+            function startCountdown() {
+                countdownDisplay.style.display = 'block';
+                countdownDisplay.textContent = `You can request another link in ${countdown} seconds.`;
+                const interval = setInterval(() => {
+                    countdown--;
+                    countdownDisplay.textContent = `You can request another link in ${countdown} seconds.`;
+                    if (countdown <= 0) {
+                        clearInterval(interval);
+                        countdownDisplay.style.display = 'none';
+                        sendButton.disabled = false;
+                    }
+                }, 1000);
+            }
+
+            function autoHide(element) {
+                setTimeout(() => {
+                    element.style.display = 'none';
+                }, 5000);
+            }
         });
     </script>
 </body>

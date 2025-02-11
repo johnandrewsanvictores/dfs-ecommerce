@@ -32,134 +32,136 @@ if (strtotime($user["reset_token_expires_at"]) <= time()) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reset Password</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="../global.css">
     <style>
         body {
-            background: linear-gradient(to right, rgb(192, 208, 224), #e9ecef);
-        }
-
-        .reset-password-page {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
             display: flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            padding: 1rem;
+            height: 100vh;
+            background: var(--white-bg);
         }
 
-        .reset-password-container {
-            background: linear-gradient(to bottom right, #ffffff, #f0f4f8);
-            border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        .container {
+            display: flex;
             width: 100%;
-            max-width: 400px;
+        }
+
+        .form-section {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
             padding: 2rem;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
+            background: var(--white-bg);
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
         }
 
-        .reset-password-container::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(233, 30, 99, 0.1);
-            border-radius: 12px;
-            z-index: 0;
-            transition: transform 0.5s ease;
-            transform: scale(1.1);
+        .image-section {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: var(--primary);
         }
 
-        .reset-password-container:hover::before {
-            transform: scale(1.2);
+        .image-section img {
+            max-width: 80%;
+            height: auto;
         }
 
-        h1 {
-            font-size: 1.8rem;
-            color: #333;
-            margin-bottom: 1.5rem;
-            position: relative;
-            z-index: 1;
+        h4 {
+            margin-bottom: 1rem;
+        }
+
+        p {
+            color: var(--font-dark);
+            margin-bottom: 2rem;
+            font-size: 1rem;
         }
 
         .form-group {
             margin-bottom: 1.5rem;
+            width: 100%;
             text-align: left;
         }
 
         .form-group label {
             display: block;
             margin-bottom: 0.5rem;
-            color: #666;
-            font-size: 0.95rem;
+            color: var(--font-dark);
+            font-size: 0.9rem;
             font-weight: 500;
         }
 
         .form-group input {
             width: 100%;
             padding: 0.8rem;
-            border: 1.5px solid #E0E0E0;
-            border-radius: 6px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
             outline: none;
             transition: border-color 0.3s ease;
             font-size: 1rem;
-            background: #FAFAFA;
-            position: relative;
-            z-index: 1;
+            background: #f9f9f9;
         }
 
         .form-group input:focus {
-            border-color: #E91E63;
+            border-color: var(--primary);
             background: white;
-            box-shadow: 0 0 0 4px rgba(233, 30, 99, 0.1);
+            box-shadow: 0 0 0 3px rgba(223, 14, 142, 0.1);
         }
 
         .reset-btn {
             width: 100%;
-            padding: 0.9rem;
-            background: linear-gradient(to right, #E91E63, #F06292);
+            max-width: 300px;
+            padding: 0.8rem;
+            background: var(--primary);
             color: white;
             border: none;
-            border-radius: 6px;
+            border-radius: 4px;
             cursor: pointer;
             font-size: 1rem;
             font-weight: 600;
-            transition: background 0.3s ease, transform 0.2s ease;
+            transition: background 0.3s ease;
             margin-top: 1rem;
-            position: relative;
-            z-index: 1;
         }
 
         .reset-btn:hover {
-            background: linear-gradient(to right, #D81B60, #E91E63);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 15px rgba(233, 30, 99, 0.3);
+            background: var(--primary-hover-color);
+        }
+
+        form {
+            width: 100%;
+            max-width: 30em;
         }
     </style>
 </head>
 
 <body>
-    <div class="reset-password-page">
-        <div class="reset-password-container">
-            <h1>Reset Your Password</h1>
+    <div class="container">
+        <div class="form-section">
+            <h4>Reset Password</h4>
+            <p>Please choose your new password</p>
             <form method="post" action="../api/process-reset-password.php">
                 <input type="hidden" name="token" value="<?= htmlspecialchars($token) ?>">
 
                 <div class="form-group">
                     <label for="password">New Password</label>
-                    <input type="password" id="password" name="password" required>
+                    <input type="password" id="password" name="password" required autocomplete="new-password">
                 </div>
 
                 <div class="form-group">
-                    <label for="password_confirmation">Repeat Password</label>
-                    <input type="password" id="password_confirmation" name="password_confirmation" required>
+                    <label for="password_confirmation">Confirm Password</label>
+                    <input type="password" id="password_confirmation" name="password_confirmation" required autocomplete="new-password">
                 </div>
 
-                <button type="submit" class="reset-btn">Send</button>
+                <button type="submit" class="reset-btn">Save New Password</button>
             </form>
+        </div>
+        <div class="image-section">
+            <img src="../assets/images/main/reset-pass.svg" alt="Reset Password Image">
         </div>
     </div>
 </body>
