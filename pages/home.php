@@ -14,6 +14,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="../js/banner.js"></script>
     <script src="../js/filter.js"></script>
+    <script src="../js/totop.js"></script>
+    <script src="../js/pagination.js"></script>
     <title>Dreams Shop Bags - Home</title>
 </head>
 
@@ -35,13 +37,13 @@
             <li>Affordable prices</li>
             <li>Fast shipping</li>
         </ul>
-        <a href="#products" class="shopbtn">Shop Now!</a>
+        <a href="#filter" class="shopbtn">Shop Now!</a>
     </div>
     <div class="HeroImg">
         <div class="img-container">
             <img src="../assets/images/main/temp/img1.jpg" alt="Image 1" class="img1">
             <div class="img-overlay">
-                <p>New Collection</p>
+                <p>New Arrival</p>
             </div>
         </div>
         <div class="img-container">
@@ -54,7 +56,7 @@
 </section>
 
 <section id="banner">
-    <div class="banner-container">
+    <div class="banner-container" >
         <div class="slider-wrappers">
             <button id="prevBtns" class="banner-btn">&#8249;</button>
             <div class="slider-containers">
@@ -104,33 +106,33 @@
     <h2 class="section-title">Brands</h2>
     <div class="brand-list">
         <div class="card">
-            <img src="path/to/brand1.jpg" alt="Brand 1" class="card-img-top">
+            <img src="https://th.bing.com/th/id/OIP.hxBIBXxepLAqV6kXWeBisgHaHa?w=171&h=180&c=7&r=0&o=5&pid=1.7" alt="Louis Vuitton" class="card-img-top">
             <div class="card-body">
-                <h5 class="card-title">Brand 1</h5>
+                <h5 class="card-title">Louis Vuitton</h5>
             </div>
         </div>
         <div class="card">
-            <img src="path/to/brand2.jpg" alt="Brand 2" class="card-img-top">
+            <img src="https://th.bing.com/th/id/OIP.hxBIBXxepLAqV6kXWeBisgHaHa?w=171&h=180&c=7&r=0&o=5&pid=1.7" alt="Gucci" class="card-img-top">
             <div class="card-body">
-                <h5 class="card-title">Brand 2</h5>
+                <h5 class="card-title">Gucci</h5>
             </div>
         </div>
         <div class="card">
-            <img src="path/to/brand3.jpg" alt="Brand 3" class="card-img-top">
+            <img src="https://th.bing.com/th/id/OIP.hxBIBXxepLAqV6kXWeBisgHaHa?w=171&h=180&c=7&r=0&o=5&pid=1.7" alt="Chanel" class="card-img-top">
             <div class="card-body">
-                <h5 class="card-title">Brand 3</h5>
+                <h5 class="card-title">Chanel</h5>
             </div>
         </div>
         <div class="card">
-            <img src="path/to/brand4.jpg" alt="Brand 4" class="card-img-top">
+            <img src="https://th.bing.com/th/id/OIP.hxBIBXxepLAqV6kXWeBisgHaHa?w=171&h=180&c=7&r=0&o=5&pid=1.7" alt="Hermès" class="card-img-top">
             <div class="card-body">
-                <h5 class="card-title">Brand 4</h5>
+                <h5 class="card-title">Hermès</h5>
             </div>
         </div>
         <div class="card">
-            <img src="path/to/brand5.jpg" alt="Brand 5" class="card-img-top">
+            <img src="https://th.bing.com/th/id/OIP.hxBIBXxepLAqV6kXWeBisgHaHa?w=171&h=180&c=7&r=0&o=5&pid=1.7" alt="Prada" class="card-img-top">
             <div class="card-body">
-                <h5 class="card-title">Brand 5</h5>
+                <h5 class="card-title">Prada</h5>
             </div>
         </div>
     </div>
@@ -138,7 +140,7 @@
 
 <section id="categories">
     <h2 class="section-title">Categories</h2>
-    <div class="category-list" style="display: flex; flex-wrap: wrap;">
+    <div class="category-list">
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">Category 1</h5>
@@ -175,67 +177,45 @@
             <option value="default">Default</option>
             <option value="discounted">Discounted</option>
             <option value="new-arrival">New Arrival</option>
-            <option value="popular">Popular</option>
+            <option value="best-seller">Best Seller</option>
         </select>
-        <label for="price-min">Price range:</label>
-        <input type="number" id="price-min" name="price-min" placeholder="Min" min="0">
-        <input type="number" id="price-max" name="price-max" placeholder="Max" min="0">
+
+        <div id="price-range-section" class="hidden">
+            <label for="price-min">Price range:</label>
+            <input type="number" id="price-min" name="price-min" placeholder="Min" min="0" oninput="this.value = this.value.replace(/[^0-9]/g, '');">
+            <input type="number" id="price-max" name="price-max" placeholder="Max" min="0" oninput="this.value = this.value.replace(/[^0-9]/g, '');">
+        </div>
+        <button type="button" id="show-price-range">Price Range</button>
         <button type="button" id="apply-filters">Apply</button>
     </form>
 </section>
 
 <section id="products">
     <h2 class="section-title">Products</h2>
-    <div class="product-list" style="display: flex; flex-wrap: wrap; gap: 20px;">
-        <div class="card" data-category="discounted" data-price="10" style="flex: 1 1 calc(20% - 20px); box-sizing: border-box;">
-            <a href="pdetail.php?id=1">
+    <div class="product-list">
+        <?php for ($i = 1; $i <= 54; $i++): ?>
+        <div class="card" data-category="category<?= $i % 5 + 1 ?>" data-price="<?= $i * 10 ?>" data-sort="<?= ($i % 4 == 0) ? 'discounted' : (($i % 4 == 1) ? 'new-arrival' : (($i % 4 == 2) ? 'best-seller' : 'default')) ?>">
+            <a href="pdetail.php?id=<?= $i ?>">
                 <div class="card-body">
-                    <h5 class="card-title">Product 1</h5>
-                    <img src="../assets/images/products/product1.jpg" alt="Product 1" class="card-img-top">
-                    <p class="card-text">Description of Product 1</p>
-                    <p class="card-price">$10.00</p>
+                    <img src="https://th.bing.com/th/id/OIP.hxBIBXxepLAqV6kXWeBisgHaHa?w=171&h=180&c=7&r=0&o=5&pid=1.7<?= $i ?>" alt="Product <?= $i ?>" class="card-img-top">
+                    <h5 class="card-title">Product <?= $i ?></h5>
+                    <p class="card-text">Description of Product <?= $i ?></p>
+                    <p class="card-price">$<?= $i * 10 ?>.00</p>
                 </div>
             </a>
         </div>
-        <div class="card" data-category="new-arrival" data-price="20" style="flex: 1 1 calc(20% - 20px); box-sizing: border-box;">
-            <a href="pdetail.php?id=2">
-                <div class="card-body">
-                    <h5 class="card-title">Product 2</h5>
-                    <img src="../assets/images/products/product2.jpg" alt="Product 2" class="card-img-top">
-                    <p class="card-text">Description of Product 2</p>
-                    <p class="card-price">$20.00</p>
-                </div>
-            </a>
-        </div>
-        <div class="card" data-category="popular" data-price="30" style="flex: 1 1 calc(20% - 20px); box-sizing: border-box;">
-            <a href="pdetail.php?id=3">
-                <div class="card-body">
-                    <h5 class="card-title">Product 3</h5>
-                    <img src="../assets/images/products/product3.jpg" alt="Product 3" class="card-img-top">
-                    <p class="card-text">Description of Product 3</p>
-                    <p class="card-price">$30.00</p>
-                </div>
-            </a>
-        </div>
-        <div class="card" data-category="discounted" data-price="40" style="flex: 1 1 calc(20% - 20px); box-sizing: border-box;">
-            <a href="pdetail.php?id=4">
-                <div class="card-body">
-                    <h5 class="card-title">Product 4</h5>
-                    <img src="../assets/images/products/product4.jpg" alt="Product 4" class="card-img-top">
-                    <p class="card-text">Description of Product 4</p>
-                    <p class="card-price">$40.00</p>
-                </div>
-            </a>
-        </div>
-        <div class="card" data-category="new-arrival" data-price="50" style="flex: 1 1 calc(20% - 20px); box-sizing: border-box;">
-            <a href="pdetail.php?id=5">
-                <div class="card-body">
-                    <h5 class="card-title">Product 5</h5>
-                    <img src="../assets/images/products/product5.jpg" alt="Product 5" class="card-img-top">
-                    <p class="card-text">Description of Product 5</p>
-                    <p class="card-price">$50.00</p>
-                </div>
-            </a>
+        <?php endfor; ?>
+    </div>
+    
+    <div class="pagination-container">
+        <div class="pagination">
+            <a href="#">&laquo;</a>
+            <a href="#" class="active">1</a>
+            <a href="#">2</a>
+            <a href="#">3</a>
+            <a href="#">4</a>
+            <a href="#">5</a>
+            <a href="#">&raquo;</a>
         </div>
     </div>
 </section>
@@ -243,6 +223,9 @@
 <footer>
 <?php require("../includes/footer.php") ?>
 </footer>
+
+<button id="scrollToTopBtn" title="Go to top">&#8679;</button>
+
 </body>
 </html>
 
