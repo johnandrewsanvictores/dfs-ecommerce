@@ -1,0 +1,340 @@
+.checkout-page {
+    
+    display: flex;
+    gap: 2em;
+    padding: 2em;
+    max-width: 1200px;
+    margin: 2em auto;
+    margin-top: calc(2em + 70px);
+    background: var(--white-bg);
+    border-radius: 1em;
+    box-shadow: 0 0.5em 1em rgba(0, 0, 0, 0.1);
+}
+
+.left-side {
+    flex: 2;
+    padding: 1em;
+}
+
+.right-side {
+    flex: 1;
+    padding: 2em;
+    background: var(--white-bg);
+    border-radius: 1em;
+    box-shadow: 0 0.5em 1em rgba(0, 0, 0, 0.1);
+}
+
+h4, h6 {
+    margin-bottom: 1em;
+}
+
+.address-container {
+    background: var(--white-bg);
+    padding: 1em;
+    border-radius: 0.5em;
+    box-shadow: 0 0.25em 0.5em rgba(0, 0, 0, 0.1);
+    margin-bottom: 2em;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+    position: relative;
+}
+
+.address-container:hover {
+    transform: translateY(-0.25em);
+}
+
+.address-container h6 {
+    color: var(--font-dark);
+    margin-bottom: 0.5em;
+}
+
+.address-container > div {
+    display: flex;
+    gap: 0.5em;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.address-container p {
+    font-size: var(--small);
+    color: var(--font-dark);
+    margin: 0.25em 0;
+    width: 100%;
+    margin-right: 1em;
+    max-width: 56ch;
+}
+
+.address-container i {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: var(--h6);
+}
+
+#address-type {
+    background: var(--dark-bg);
+    color: var(--font-white);
+    padding: 0.25em 0.5em;
+    border-radius: 0.25em;
+    width: auto;
+}
+
+.main-content {
+    margin-top: 2em;
+}
+
+.items-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+.item-container {
+    display: flex;
+    align-items: center;
+    gap: 1em;
+    padding: 1em;
+    background: var(--white-bg);
+    border-radius: 0.5em;
+    box-shadow: 0 0.25em 0.5em rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+.item-container > p {
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
+    color: var(--secondary);
+    font-size: var(--small);
+}
+
+.item-image img {
+    width: 5em;
+    height: 5em;
+    object-fit: cover;
+    border-radius: 0.5em;
+}
+
+.item-details h6 {
+    color: var(--font-dark);
+    margin-bottom: 0.25em;
+}
+
+.item-details p {
+    font-size: var(--small);
+    color: var(--font-dark);
+}
+
+.payment-container {
+    margin-top: 2em;
+}
+
+.payment-container h6 {
+    margin-bottom: 1em;
+}
+
+.payment-container form {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+.payment-container input[type="radio"] {
+    margin-right: 0.5em;
+}
+
+.payment-container label {
+    font-size: var(--small);
+    color: var(--font-dark);
+}
+
+.summary {
+    margin-top: 1em;
+}
+
+.summary h6 {
+    font-size: var(--h5);
+    color: var(--primary);
+    margin-bottom: 1em;
+    border-bottom: 2px solid var(--primary);
+    padding-bottom: 0.5em;
+}
+
+.voucher {
+    display: flex;
+    gap: 0.5em;
+    margin-bottom: 1.5em;
+}
+
+.voucher input {
+    flex: 1;
+    padding: 0.25em 0.5em;
+    border: 1px solid var(--stroke-grey);
+    border-radius: 0.5em;
+    font-size: var(--small);
+    background: var(--input-bg-color);
+    transition: border-color 0.2s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.voucher input:focus {
+    border-color: var(--primary);
+    outline: none;
+    box-shadow: 0 0 3px var(--primary);
+}
+
+.voucher button {
+    padding: 0.75em 1.5em;
+    background: var(--primary);
+    color: var(--font-white);
+    border: none;
+    border-radius: 0.5em;
+    cursor: pointer;
+    transition: background 0.2s ease;
+    font-size: var(--small);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.voucher button:hover {
+    background: var(--primary-hover-color);
+}
+
+.price-summary {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    margin-bottom: 1.5em;
+}
+
+.price-summary div {
+    display: flex;
+    justify-content: space-between;
+    font-size: var(--small);
+    color: var(--font-dark);
+}
+
+.price-summary div span {
+    font-weight: 600;
+    color: var(--font-dark);
+}
+
+.total-price-container {
+    display: flex;
+    justify-content: space-between;
+    font-size: var(--h5);
+    color: var(--primary);
+    padding-top: 1em;
+    border-top: 2px solid var(--primary);
+}
+
+.total-price-container p {
+    font-size: var(--h6);
+    font-weight: 700;
+}
+
+.total-price-container span {
+    font-weight: 700;
+}
+
+.subtotal p{
+    font-size: var(--body);
+}
+
+.checkout-btn {
+    width: 100%;
+    padding: 0.5em 1em;
+    background: var(--primary);
+    color: var(--font-white);
+    border: none;
+    border-radius: 0.5em;
+    font-size: var(--h6);
+    cursor: pointer;
+    transition: background 0.2s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.checkout-btn:hover {
+    background: var(--primary-hover-color);
+}
+
+/* Divider Styling */
+hr {
+    border: 0;
+    height: 1px;
+    background: var(--stroke-grey);
+    margin: 1.5em 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .checkout-page {
+        flex-direction: column;
+        padding: 1em;
+    }
+
+    .left-side, .right-side {
+        padding: 0.5em;
+    }
+
+    .item-image img {
+        width: 100%;
+        max-width: 10em;
+        height: 12em;
+        object-fit: cover;
+    }
+
+    .right-side {
+    }
+
+    .voucher {
+        flex-direction: column;
+    }
+
+    .voucher button {
+        width: 100%;
+        max-width: 10em;
+    }
+
+    .voucher input {
+        padding: 0.7em 1.5em;
+        margin-top: 1em;
+    }
+
+    .checkout-btn {
+        width: 100%;
+        max-width: 20em;
+    }
+
+    .checkout-btn-div {
+        width: 100%;
+        display: flex;
+        justify-content: center !important;
+    }
+}
+
+@media (max-width: 480px) {
+    h4 {
+        font-size: var(--h5);
+    }
+
+    h6 {
+        font-size: var(--body);
+    }
+
+    .address-container, .item-container {
+        padding: 0.75em;
+    }
+
+    .summary h6 {
+        font-size: var(--h6);
+    }
+
+    .total-price-container {
+        font-size: var(--h6);
+    }
+
+    .checkout-btn {
+        font-size: var(--body);
+    }
+}
