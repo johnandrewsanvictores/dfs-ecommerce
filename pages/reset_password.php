@@ -3,25 +3,52 @@
 require __DIR__ . '/../includes/connection.php';
 
 $token = $_GET["token"] ?? '';
+$error = '';
+$success = '';
 
-if (empty($token)) {
-    die("Invalid token.");
-}
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $password = $_POST['password'] ?? '';
+    $password_confirmation = $_POST['password_confirmation'] ?? '';
 
-$token_hash = hash("sha256", $token);
+    if ($password !== $password_confirmation) {
+        $error = "Passwords do not match.";
+    } elseif (strlen($password) < 8) {
+        $error = "Password must be at least 8 characters long.";
+    } else {
+        $token_hash = hash("sha256", $_POST['token']);
+        $sql = "SELECT * FROM customer WHERE reset_token_hash = :token_hash";
+        $stmt = $connection->prepare($sql);
+        $stmt->execute(['token_hash' => $token_hash]);
 
-$sql = "SELECT * FROM customer WHERE reset_token_hash = :token_hash";
-$stmt = $connection->prepare($sql);
-$stmt->execute(['token_hash' => $token_hash]);
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-$user = $stmt->fetch(PDO::FETCH_ASSOC);
+        if ($user && strtotime($user["reset_token_expires_at"]) > time()) {
+            $hashed_password = password_hash($password, PASSWORD_BCRYPT);
+            $update_sql = "UPDATE customer SET password = :password, reset_token_hash = NULL, reset_token_expires_at = NULL WHERE id = :id";
+            $update_stmt = $connection->prepare($update_sql);
+            $update_stmt->execute(['password' => $hashed_password, 'id' => $user['id']]);
+            $success = "Your password has been reset successfully.";
+        } else {
+            $error = "Invalid or expired token.";
+        }
+    }
+} else {
+    if (empty($token)) {
+        $error = "Invalid token.";
+    } else {
+        $token_hash = hash("sha256", $token);
+        $sql = "SELECT * FROM customer WHERE reset_token_hash = :token_hash";
+        $stmt = $connection->prepare($sql);
+        $stmt->execute(['token_hash' => $token_hash]);
 
-if (!$user) {
-    die("Token not found.");
-}
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-if (strtotime($user["reset_token_expires_at"]) <= time()) {
-    die("Token has expired.");
+        if (!$user) {
+            $error = "Token not found.";
+        } elseif (strtotime($user["reset_token_expires_at"]) <= time()) {
+            $error = "Token has expired.";
+        }
+    }
 }
 ?>
 
@@ -72,7 +99,32 @@ if (strtotime($user["reset_token_expires_at"]) <= time()) {
             height: auto;
         }
 
-        h4 {
+        .error-message,
+        .success-message {
+            width: 100%;
+            max-width: 300px;
+            padding: 0.8rem;
+            margin-bottom: 1rem;
+            border-radius: 4px;
+            text-align: center;
+            font-size: 1rem;
+        }
+
+        .error-message {
+            background-color: rgba(187, 83, 83, 0.1);
+            color: var(--red);
+            border: 1px solid var(--red);
+        }
+
+        .success-message {
+            background-color: rgba(94, 218, 110, 0.1);
+            color: var(--green);
+            border: 1px solid var(--green);
+        }
+
+        h1 {
+            font-size: 1.8rem;
+            color: var(--font-dark);
             margin-bottom: 1rem;
         }
 
@@ -85,6 +137,7 @@ if (strtotime($user["reset_token_expires_at"]) <= time()) {
         .form-group {
             margin-bottom: 1.5rem;
             width: 100%;
+            max-width: 300px;
             text-align: left;
         }
 
@@ -131,20 +184,20 @@ if (strtotime($user["reset_token_expires_at"]) <= time()) {
         .reset-btn:hover {
             background: var(--primary-hover-color);
         }
-
-        form {
-            width: 100%;
-            max-width: 30em;
-        }
     </style>
 </head>
 
 <body>
     <div class="container">
         <div class="form-section">
-            <h4>Reset Password</h4>
+            <?php if ($error): ?>
+                <div class="error-message"><?= htmlspecialchars($error) ?></div>
+            <?php elseif ($success): ?>
+                <div class="success-message"><?= htmlspecialchars($success) ?></div>
+            <?php endif; ?>
+            <h1>Reset Password</h1>
             <p>Please choose your new password</p>
-            <form method="post" action="../api/process-reset-password.php">
+            <form method="post" action="">
                 <input type="hidden" name="token" value="<?= htmlspecialchars($token) ?>">
 
                 <div class="form-group">

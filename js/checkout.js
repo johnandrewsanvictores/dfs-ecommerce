@@ -36,15 +36,15 @@ const Checkout_Data = (function() {
                 {
                     "name": "Leather Handbag",
                     "quantity": 1,
-                    "amount": 2500,
+                    "amount": 1000000,
                     "currency": "PHP",
                     "images": ["https://m.media-amazon.com/images/I/61RSyB+kbzL._AC_SL1200_.jpg"],
                     "description": "Brown, medium-sized, smooth-textured, made of genuine leather."
                 },
                 {
                     "name": "Canvas Tote Bag",
-                    "quantity": 2,
-                    "amount": 1200,
+                    "quantity": 1,
+                    "amount": 400000,
                     "currency": "PHP",
                     "images": ["https://transferit.com.ph/pcimages/5997622/152927057/12/1/EFEFEF/prod.jpg?b=11429348&v=1720481852"],
                     "description": "Beige, large-sized, soft-textured, made of durable canvas fabric."
@@ -52,7 +52,7 @@ const Checkout_Data = (function() {
                 {
                     "name": "Nylon Backpack",
                     "quantity": 1,
-                    "amount": 1800,
+                    "amount": 300000,
                     "currency": "PHP",
                     "images": ["https://colehaan.com.ph/cdn/shop/files/BaseTransform1_e0459d22-cc37-4870-a765-598ab27df01d.jpg?v=1722935327&width=1946"],
                     "description": "Black, compact-sized, water-resistant, made of high-quality nylon."

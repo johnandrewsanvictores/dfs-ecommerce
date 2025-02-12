@@ -30,7 +30,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             'json' => [
                 "data" => [
                     "attributes" => [
-                        "cancel_url" => "http://localhost:8080/dfs-ecommerce/pages/cancel_payment.php",
+                        "cancel_url" => "http://localhost/dfs-ecommerce/pages/cancel_payment.php",
                         "billing" => [
                             "address" => [
                                 "line1" => $billing_info['address']['line1'],
@@ -52,7 +52,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         "show_description" => true,
                         "show_line_items" => true,
                         "statement_descriptor" => "Dream Shop Bags",
-                        "success_url" => "http://localhost:8080/dfs-ecommerce/pages/success_payment.php?payment=paymongo"
+                        "success_url" => "http://localhost/dfs-ecommerce/pages/success_payment.php?payment=paymongo"
                     ]
                 ]
             ],
@@ -87,5 +87,3 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit();
     }
 }
-?>
-
