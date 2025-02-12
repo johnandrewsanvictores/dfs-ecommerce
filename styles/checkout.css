@@ -283,10 +283,7 @@ hr {
         height: 12em;
         object-fit: cover;
     }
-
-    .right-side {
-    }
-
+    
     .voucher {
         flex-direction: column;
     }

@@ -7,6 +7,7 @@
     <link rel="preconnectionect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
     <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Lobster&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <link rel="stylesheet" href="../styles/checkout.css">
     <link rel="stylesheet" href="../global.css">
@@ -15,9 +16,9 @@
 <body>
     <?php include '../includes/navbar.php'; ?>
 
-    <main class="checkout-page">
-        <div class="left-side">
-            <h4>Checkout</h4>
+        <form class="checkout-page" id="checkout-form">
+            <div class="left-side">
+                <h4>Checkout</h4>
             <div class="address-container">
                 <h6><span class="name">Rhesty Adormeo</span> | <span class="phone">09123456789</span></h6>
                 <div>
@@ -55,58 +56,57 @@
     
             <div class="payment-container">
                 <h6>Select Payment Method</h6>
-                <form action="">
-                    <div>
-                        <input type="radio" name="payment-method" id="cod">
-                        <label for="cod">Cash on Delivery</label>
+                <div>
+                    <input type="radio" name="payment-method" value="cod" id="cod">
+                    <label for="cod">Cash on Delivery</label>
                     </div>
                     <div>
-                        <input type="radio" name="payment-method" id="online-payment">
+                        <input type="radio" name="payment-method" value="online-payment" id="online-payment">
                         <label for="online-payment">Online Payment</label>
                     </div>
-                    
-                </form>
+                </div>
             </div>
         </div>
 
         <div class="right-side">
             <h6>Summary</h6>
             <hr>
-            <form action="">
+            <div>
                 <p>Do you have a voucher code?</p>
                 <div class="voucher">
                     <input type="text" name="voucher-code" id="voucher-code">
-                    <button type="submit">Apply</button>
+                    <button type="button" id="apply-voucher">Apply</button>
                 </div>
-            </form>
+            </div>
             <hr>
             <div class="price-summary">
                 <div class="subtotal">
                     <p>Subtotal</p>
-                    <p>₱399.99</p>
+                    <p id="subtotal-price">₱399.99</p>
                 </div>
                 <div>
                     <p>Shipping Fee</p>
-                    <p>₱399.99</p>
+                    <p id="shipping-fee">₱99.99</p>
                 </div>
                 <div>
                     <p>Discount</p>
-                    <p>₱-399.99</p>
-                </div>
-                <div>            
+                    <p id="discount">₱-50.00</p>
+                </div>        
             </div>
             <div class="total-price-container">
                 <p>Total</p>
-                <p>₱399.99</p>
+                <p id="total-price">₱50</p>
             </div>
             <hr>
             <div class="checkout-btn-div">
                 <button type="submit" class="checkout-btn">Checkout</button>
             </div>
         </div>
-    </main>
+    </form>
 
 
+    
+    <script src="../js/checkout.js"></script>
     <?php include '../includes/footer.php'; ?>
 </body>
 </html>
