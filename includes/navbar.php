@@ -1,3 +1,16 @@
+<?php
+// Start session if not already started
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+// Check if user is logged in as customer
+$isCustomerLoggedIn = isset($_SESSION['customer_id']) && isset($_SESSION['user_type']) && $_SESSION['user_type'] === 'customer';
+
+// Get current page name
+$current_page = basename($_SERVER['PHP_SELF'], '.php');
+?>
+
 <nav>
     <div class="nav-bar">
         <div class="left-nav">
@@ -9,22 +22,24 @@
         </div>
 
         <div class="right-nav">
-
             <div class="menu">
                 <div class="logo-toggle">
                     <span class="logo"><a href="#">Dream Shop Bags</a></span>
                     <i class="fa-solid fa-xmark siderbarClose"></i>
-
                 </div>
-                <ul class=" nav-links">
-                    <li><a href="../pages/home.php" class="active">Home</a></li>
-                    <li><a href="../pages/about.php">About</a></li>
-                    <li><a href="../pages/contact.php">Contact Us</a></li>
-                    <div id="btns-unauthenticated">
-                        <a href="../pages/login.php">Login</a>
-                        <a href="../pages/register.php" id="register-btn">Register</a>
-                    </div>
-                    <li style="display:none"><a href="../pages/account.php">My Account</a></li>
+                <ul class="nav-links">
+                    <li><a href="home.php" class="<?php echo $current_page === 'home' ? 'active' : ''; ?>">Home</a></li>
+                    <li><a href="about.php" class="<?php echo $current_page === 'about' ? 'active' : ''; ?>">About</a></li>
+                    <li><a href="contact.php" class="<?php echo $current_page === 'contact' ? 'active' : ''; ?>">Contact Us</a></li>
+
+                    <?php if ($isCustomerLoggedIn): ?>
+                        <li><a href="account.php" class="<?php echo $current_page === 'account' ? 'active' : ''; ?>">My Account</a></li>
+                    <?php else: ?>
+                        <div id="btns-unauthenticated">
+                            <a href="#">Login</a>
+                            <a href="#" id="register-btn">Register</a>
+                        </div>
+                    <?php endif; ?>
                 </ul>
             </div>
             <div class="nav-icons-container">
@@ -46,8 +61,29 @@
     </div>
 </nav>
 
+<script>
+    const body = document.querySelector("body"),
+        nav = document.querySelector("nav"),
+        searchToggle = document.querySelector(".searchToggle"),
+        sidebarOpen = document.querySelector(".sidebarOpen"),
+        siderbarClose = document.querySelector(".siderbarClose");
 
-<script src="../js/navbar.js"></script>
+    // js code to toggle search box
+    searchToggle.addEventListener("click", () => {
+        searchToggle.classList.toggle("active");
+    });
+
+    //   js code to toggle sidebar
+    sidebarOpen.addEventListener("click", () => {
+        nav.classList.add("active");
+    });
+
+    body.addEventListener("click", e => {
+        let clickedElm = e.target;
+        if (!clickedElm.classList.contains("sidebarOpen") && !clickedElm.classList.contains("menu")) {
+            nav.classList.remove("active");
+        }
+    });
 </script>
 
 <style>
@@ -145,24 +181,43 @@
         color: var(--font-dark);
         text-decoration: none;
         padding: 10px;
+        transition: all 0.3s ease;
     }
 
     .nav-links li a::before {
         content: '';
         position: absolute;
-        left: 50%;
-        bottom: 0;
-        transform: translateX(-50%);
-        height: 6px;
-        width: 6px;
-        border-radius: 50%;
-        background-color: var(--font-white);
-        opacity: 0;
-        transition: all 0.3s ease;
+        left: 0;
+        bottom: -2px;
+        width: 0;
+        height: 2px;
+        background: linear-gradient(to right, var(--primary), var(--secondary));
+        transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        border-radius: 4px;
     }
 
-    .nav-links li:hover a::before {
-        opacity: 1;
+    .nav-links li a::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: -2px;
+        width: 0;
+        height: 2px;
+        background: linear-gradient(to right, var(--primary), var(--secondary));
+        opacity: 0.3;
+        filter: blur(4px);
+        transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        border-radius: 4px;
+    }
+
+    .nav-links li a:hover {
+        color: var(--primary);
+        transform: translateY(-1px);
+    }
+
+    .nav-links li a:hover::before,
+    .nav-links li a:hover::after {
+        width: 100%;
     }
 
     #btns-unauthenticated {
@@ -388,21 +443,151 @@
 
     }
 
+    /* Active State */
     .nav-links li a.active {
-        color: var(--secondary);
+        color: var(--primary);
+        font-weight: 500;
     }
 
-    .nav-links li a.active::before {
-        opacity: 1;
-        background-color: var(--secondary);
+    .nav-links li a.active::before,
+    .nav-links li a.active::after {
+        width: 100%;
     }
 
-    .nav-links li a:hover {
-        color: var(--secondary);
+    /* Login/Register Buttons Hover */
+    #btns-unauthenticated a {
+        text-decoration: none;
+        color: inherit;
+        background-color: var(--primary);
+        padding: 0.75em 1.5em;
+        color: var(--font-white);
+        border-radius: 10px;
+        font-size: var(--small);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+        overflow: hidden;
     }
 
-    .nav-links li a:hover::before {
-        opacity: 1;
-        background-color: var(--secondary);
+    #btns-unauthenticated a::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 0;
+        height: 0;
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 50%;
+        transform: translate(-50%, -50%);
+        transition: width 0.6s ease, height 0.6s ease;
+    }
+
+    #btns-unauthenticated a:hover::before {
+        width: 300px;
+        height: 300px;
+    }
+
+    #register-btn {
+        color: var(--font-dark) !important;
+        background: transparent !important;
+        border: 2px solid var(--primary);
+        position: relative;
+        z-index: 1;
+    }
+
+    #register-btn::before {
+        background: var(--primary) !important;
+        z-index: -1;
+    }
+
+    #register-btn:hover {
+        color: var(--font-white) !important;
+    }
+
+    /* Mobile Styles */
+    @media (max-width: 790px) {
+        .nav-links li a {
+            padding: 12px 15px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links li a:hover {
+            background: rgba(255, 255, 255, 0.05);
+            transform: translateX(8px);
+            padding-left: 20px;
+            color: var(--font-white);
+        }
+
+        .nav-links li a::before,
+        .nav-links li a::after {
+            display: none;
+        }
+
+        .nav-links li a.active {
+            color: var(--font-white);
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+            padding-left: 20px;
+        }
+
+        #btns-unauthenticated a {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        #btns-unauthenticated a:hover {
+            transform: scale(1.02);
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        #register-btn {
+            border-color: rgba(255, 255, 255, 0.5) !important;
+        }
+
+        #register-btn:hover {
+            background: rgba(255, 255, 255, 0.1) !important;
+        }
+    }
+
+    /* Animation Keyframes */
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes slideIn {
+        from {
+            transform: translateX(-10px);
+            opacity: 0;
+        }
+
+        to {
+            transform: translateX(0);
+            opacity: 1;
+        }
+    }
+
+    /* Animation for hover effect */
+    @keyframes gradientFlow {
+        0% {
+            background-position: 0% 50%;
+        }
+
+        50% {
+            background-position: 100% 50%;
+        }
+
+        100% {
+            background-position: 0% 50%;
+        }
     }
 </style>
